@@ -167,18 +167,23 @@ function DetailsPopup({
                   </button>
                   <button
                     type="button"
-                    className={`w-[96px] overflow-hidden rounded-full ${
-                      selectedInterviewer === item.id ? "border-4 border-indigo-600" : ""
-                    }`}
+                    className={`w-[96px] overflow-hidden rounded-full ${selectedInterviewer === item.id ? "border-4 border-indigo-600" : ""
+                      }`}
                     onClick={() => setSelectedInterviewer(item.id)}
                   >
-                    <Image
-                      src={item.image}
-                      alt="Picture of the interviewer"
-                      width={70}
-                      height={70}
-                      className="w-full h-full object-cover"
-                    />
+                    {item.image ? (
+                      <Image
+                        src={item.image}
+                        alt="Picture of the interviewer"
+                        width={70}
+                        height={70}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-2xl">
+                        {item.name?.charAt(0) || "?"}
+                      </div>
+                    )}
                   </button>
                   <CardTitle className="mt-0 text-xs text-center">{item.name}</CardTitle>
                 </div>

@@ -65,11 +65,11 @@ function QuestionsPopup({ interviewData, setProceed, setOpen }: Props) {
       interviewData.questions = questions;
       interviewData.description = description;
 
-      // Convert BigInts to strings if necessary
+      // Convert BigInts to numbers for API
       const sanitizedInterviewData = {
         ...interviewData,
-        interviewer_id: interviewData.interviewer_id.toString(),
-        response_count: interviewData.response_count.toString(),
+        interviewer_id: Number(interviewData.interviewer_id),
+        response_count: Number(interviewData.response_count),
         logo_url: organization?.imageUrl || "",
       };
 
@@ -95,9 +95,8 @@ function QuestionsPopup({ interviewData, setProceed, setOpen }: Props) {
   return (
     <div>
       <div
-        className={`text-center px-1 flex flex-col justify-top items-center w-[38rem] ${
-          interviewData.question_count > 1 ? "h-[29rem]" : ""
-        } `}
+        className={`text-center px-1 flex flex-col justify-top items-center w-[38rem] ${interviewData.question_count > 1 ? "h-[29rem]" : ""
+          } `}
       >
         <div className="relative flex justify-center w-full">
           <ChevronLeft
