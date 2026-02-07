@@ -4,11 +4,21 @@ const supabase = createClientComponentClient();
 
 const getAllInterviews = async (userId: string, organizationId: string) => {
   try {
-    const { data: clientData, error: clientError } = await supabase
-      .from("interview")
-      .select("*")
-      .or(`organization_id.eq.${organizationId},user_id.eq.${userId}`)
-      .order("created_at", { ascending: false });
+    let query = supabase.from("interview").select("*");
+
+    if (userId && organizationId) {
+      query = query.or(`organization_id.eq.${organizationId},user_id.eq.${userId}`);
+    } else if (userId) {
+      query = query.eq("user_id", userId);
+    } else if (organizationId) {
+      query = query.eq("organization_id", organizationId);
+    } else {
+      return [];
+    }
+
+    const { data: clientData, error: clientError } = await query.order("created_at", {
+      ascending: false,
+    });
 
     return [...(clientData || [])];
   } catch (error) {

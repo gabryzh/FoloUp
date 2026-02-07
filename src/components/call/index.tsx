@@ -275,9 +275,8 @@ function Call({ interview }: InterviewProps) {
                 style={{
                   width: isEnded
                     ? "100%"
-                    : `${
-                        (Number(currentTimeDuration) / (Number(interviewTimeDuration) * 60)) * 100
-                      }%`,
+                    : `${(Number(currentTimeDuration) / (Number(interviewTimeDuration) * 60)) * 100
+                    }%`,
                 }}
               />
             </div>
@@ -359,7 +358,7 @@ function Call({ interview }: InterviewProps) {
                     {!Loading ? "Start Interview" : <MiniLoader />}
                   </Button>
                   <AlertDialog>
-                    <AlertDialogTrigger>
+                    <AlertDialogTrigger asChild>
                       <Button
                         className="bg-white border ml-2 text-black min-w-15 h-10 rounded-lg flex flex-row justify-center mb-8"
                         style={{ borderColor: interview.theme_color }}
@@ -400,17 +399,16 @@ function Call({ interview }: InterviewProps) {
                       {lastInterviewerResponse}
                     </div>
                     <div className="flex flex-col mx-auto justify-center items-center align-middle">
-                      <Image
-                        src={interviewerImg}
-                        alt="Image of the interviewer"
-                        width={120}
-                        height={120}
-                        className={`object-cover object-center mx-auto my-auto ${
-                          activeTurn === "agent"
+                      {interviewerImg && (
+                        <img
+                          src={interviewerImg}
+                          alt="Image of the interviewer"
+                          className={`w-[120px] h-[120px] object-cover object-center mx-auto my-auto ${activeTurn === "agent"
                             ? `border-4 border-[${interview.theme_color}] rounded-full`
                             : ""
-                        }`}
-                      />
+                            }`}
+                        />
+                      )}
                       <div className="font-semibold">Interviewer</div>
                     </div>
                   </div>
@@ -431,11 +429,10 @@ function Call({ interview }: InterviewProps) {
                       alt="Picture of the user"
                       width={120}
                       height={120}
-                      className={`object-cover object-center mx-auto my-auto ${
-                        activeTurn === "user"
-                          ? `border-4 border-[${interview.theme_color}] rounded-full`
-                          : ""
-                      }`}
+                      className={`object-cover object-center mx-auto my-auto ${activeTurn === "user"
+                        ? `border-4 border-[${interview.theme_color}] rounded-full`
+                        : ""
+                        }`}
                     />
                     <div className="font-semibold">You</div>
                   </div>
@@ -445,7 +442,7 @@ function Call({ interview }: InterviewProps) {
             {isStarted && !isEnded && !isOldUser && (
               <div className="items-center p-2">
                 <AlertDialog>
-                  <AlertDialogTrigger className="w-full">
+                  <AlertDialogTrigger className="w-full" asChild>
                     <Button
                       className=" bg-white text-black border  border-indigo-600 h-10 mx-auto flex flex-row justify-center mb-8"
                       disabled={Loading}
@@ -495,7 +492,7 @@ function Call({ interview }: InterviewProps) {
 
                   {!isFeedbackSubmitted && (
                     <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                      <AlertDialogTrigger className="w-full flex justify-center">
+                      <AlertDialogTrigger className="w-full flex justify-center" asChild>
                         <Button
                           className="bg-indigo-600 text-white h-10 mt-4 mb-4"
                           onClick={() => setIsDialogOpen(true)}

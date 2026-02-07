@@ -22,11 +22,9 @@ const interviewerCard = ({ interviewer }: Props) => {
         <CardContent className="p-0">
           <div className="w-full h-28 overflow-hidden">
             {interviewer.image ? (
-              <Image
+              <img
                 src={interviewer.image}
                 alt="Picture of the interviewer"
-                width={200}
-                height={40}
                 className="w-full h-full object-cover object-center"
               />
             ) : (

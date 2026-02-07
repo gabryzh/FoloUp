@@ -90,11 +90,9 @@ const createInterviewerCard = () => {
               onClick={() => setGallery(true)}
             >
               {image ? (
-                <Image
+                <img
                   src={image}
                   alt="Picture of the interviewer"
-                  width={200}
-                  height={40}
                   className="w-full h-full object-cover object-center"
                 />
               ) : (
@@ -205,7 +203,7 @@ const createInterviewerCard = () => {
                     setGallery(false);
                   }}
                 >
-                  <Image alt="avatar" width={125} height={100} src={item.img} />
+                  <img alt="avatar" width={125} height={100} src={item.img} />
                 </button>
               ))}
             </div>

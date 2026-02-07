@@ -172,11 +172,9 @@ function DetailsPopup({
                     onClick={() => setSelectedInterviewer(item.id)}
                   >
                     {item.image ? (
-                      <Image
+                      <img
                         src={item.image}
                         alt="Picture of the interviewer"
-                        width={70}
-                        height={70}
                         className="w-full h-full object-cover"
                       />
                     ) : (

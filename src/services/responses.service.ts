@@ -38,7 +38,7 @@ const getAllResponses = async (interviewId: string) => {
       .select("*")
       .eq("interview_id", interviewId)
       .or("details.is.null, details->call_analysis.not.is.null")
-      .eq("is_ended", true)
+      .or("details.is.null, details->call_analysis.not.is.null")
       .order("created_at", { ascending: false });
 
     return data || [];

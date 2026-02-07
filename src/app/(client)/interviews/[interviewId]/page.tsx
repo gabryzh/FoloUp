@@ -27,10 +27,14 @@ import type { Interview } from "@/types/interview";
 import type { Response } from "@/types/response";
 import { useOrganization } from "@clerk/nextjs";
 import { Eye, Filter, Palette, Pencil, Share2, UserIcon } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect, use } from "react";
-import { ChromePicker } from "react-color";
 import { toast } from "sonner";
+
+const ChromePicker = dynamic(() => import("react-color").then((mod) => mod.ChromePicker), {
+  ssr: false,
+});
 
 interface Props {
   params: Promise<{
@@ -405,11 +409,10 @@ function InterviewHome({ params, searchParams }: Props) {
                   filterResponses().map((response) => (
                     <button
                       type="button"
-                      className={`p-2 rounded-md hover:bg-indigo-100 border-2 my-1 text-left text-xs ${
-                        resolvedSearchParams.call === response.call_id
+                      className={`p-2 rounded-md hover:bg-indigo-100 border-2 my-1 text-left text-xs ${resolvedSearchParams.call === response.call_id
                           ? "bg-indigo-200"
                           : "border-indigo-100"
-                      } flex flex-row justify-between cursor-pointer w-full`}
+                        } flex flex-row justify-between cursor-pointer w-full`}
                       key={response?.id}
                       onClick={() => {
                         router.push(
@@ -444,9 +447,8 @@ function InterviewHome({ params, searchParams }: Props) {
                               </div>
                             )}
                             <div
-                              className={`w-6 h-6 flex items-center justify-center ${
-                                response.is_viewed ? "h-full" : ""
-                              }`}
+                              className={`w-6 h-6 flex items-center justify-center ${response.is_viewed ? "h-full" : ""
+                                }`}
                             >
                               {response.analytics &&
                                 response.analytics.overallScore !== undefined && (

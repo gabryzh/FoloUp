@@ -236,7 +236,7 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                       </SelectContent>
                     </Select>
                     <AlertDialog>
-                      <AlertDialogTrigger>
+                      <AlertDialogTrigger asChild>
                         <Button disabled={isClicked} className="bg-red-500 hover:bg-red-600 p-2">
                           <TrashIcon size={16} className="" />
                         </Button>
@@ -368,15 +368,14 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                   </p>
 
                   <div
-                    className={`${
-                      call?.call_analysis?.user_sentiment === "Neutral"
+                    className={`${call?.call_analysis?.user_sentiment === "Neutral"
                         ? "text-yellow-500"
                         : call?.call_analysis?.user_sentiment === "Negative"
                           ? "text-red-500"
                           : call?.call_analysis?.user_sentiment === "Positive"
                             ? "text-green-500"
                             : "text-transparent"
-                    } text-xl`}
+                      } text-xl`}
                   >
                     ●
                   </div>

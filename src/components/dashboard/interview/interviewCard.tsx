@@ -122,13 +122,13 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
           </div>
           <div className="flex flex-row items-center mx-4 ">
             <div className="w-full overflow-hidden">
-              <Image
-                src={img}
-                alt="Picture of the interviewer"
-                width={70}
-                height={70}
-                className="object-cover object-center"
-              />
+              {img && (
+                <img
+                  src={img}
+                  alt="Picture of the interviewer"
+                  className="w-[70px] h-[70px] object-cover object-center"
+                />
+              )}
             </div>
             <div className="text-black text-sm font-semibold mt-2 mr-2 whitespace-nowrap">
               Responses: <span className="font-normal">{responseCount?.toString() || 0}</span>
@@ -143,9 +143,8 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
               <ArrowUpRight size={16} />
             </Button>
             <Button
-              className={`text-xs text-indigo-600 px-1 h-6  ${
-                copied ? "bg-indigo-300 text-white" : ""
-              }`}
+              className={`text-xs text-indigo-600 px-1 h-6  ${copied ? "bg-indigo-300 text-white" : ""
+                }`}
               variant={"secondary"}
               onClick={(event) => {
                 event.stopPropagation();

@@ -8,6 +8,7 @@ import { useState } from "react";
 
 function CreateInterviewerButton() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingZh, setIsLoadingZh] = useState(false);
 
   const createInterviewers = async () => {
     setIsLoading(true);
@@ -15,6 +16,16 @@ function CreateInterviewerButton() {
     console.log(response);
     setIsLoading(false);
     InterviewerService.getAllInterviewers();
+    window.location.reload();
+  };
+
+  const createChineseInterviewers = async () => {
+    setIsLoadingZh(true);
+    const response = await axios.get("/api/create-interviewer-zh", {});
+    console.log(response);
+    setIsLoadingZh(false);
+    InterviewerService.getAllInterviewers();
+    window.location.reload();
   };
 
   return (
@@ -34,7 +45,26 @@ function CreateInterviewerButton() {
             </div>
           )}
           <p className="my-3 mx-auto text-xs text-wrap w-fit text-center">
-            Create two Default Interviewers
+            Create English Interviewers
+          </p>
+        </CardContent>
+      </Card>
+      <Card
+        className="p-0 inline-block cursor-pointer hover:scale-105 ease-in-out duration-300 h-40 w-36 ml-1 mr-3 rounded-xl shrink-0 overflow-hidden shadow-md"
+        onClick={() => createChineseInterviewers()}
+      >
+        <CardContent className="p-0">
+          {isLoadingZh ? (
+            <div className="w-full h-20 overflow-hidden flex justify-center items-center">
+              <Loader2 size={40} className="animate-spin" />
+            </div>
+          ) : (
+            <div className="w-full h-20 overflow-hidden flex justify-center items-center">
+              <Plus size={40} className="text-red-500" />
+            </div>
+          )}
+          <p className="my-3 mx-auto text-xs text-wrap w-fit text-center">
+            创建中文面试官
           </p>
         </CardContent>
       </Card>
